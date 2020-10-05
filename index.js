@@ -1,13 +1,14 @@
 const { Engine, Render, Runner, World, Bodies } = Matter;
 
-const width = 600;
-const height = 600;
-const margin = 0;
+const margin = 10;
+const width = 600+2*margin;
+const height = 600+2*margin;
 
 const engine = Engine.create();
 
 const { world } = engine;
 
+// Array shuffling method
 const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -74,7 +75,7 @@ const render = Render.create({
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-// Borders
+// Add borders to canvas
 const walls = [
     Bodies.rectangle(width/2, 0, width, 2*margin, {isStatic: true}),
     Bodies.rectangle(width/2, height, width, 2*margin, {isStatic: true}),
@@ -94,9 +95,9 @@ grid.horizontals.forEach((row, rowIndex) => {
     row.forEach((pass, columnIndex) => {
         if (!pass) {
             const wall = Bodies.rectangle(
-                (columnIndex+0.5)*(height/cellsHorizontal),
-                (rowIndex+1)*(height/cellsHorizontal),
-                height/cellsHorizontal,
+                (columnIndex+0.5)*((height-2*margin)/cellsHorizontal)+margin,
+                (rowIndex+1)*((height-2*margin)/cellsHorizontal)+margin,
+                (height-2*margin)/cellsHorizontal,
                 1,
                 {isStatic: true}
             );
@@ -109,10 +110,10 @@ grid.verticals.forEach((row, rowIndex) => {
     row.forEach((pass, columnIndex) => {
         if (!pass) {
             const wall = Bodies.rectangle(
-                (columnIndex+1)*(width/cellsVertical),
-                (rowIndex+0.5)*(width/cellsVertical),
+                (columnIndex+1)*((width-2*margin)/cellsVertical)+margin,
+                (rowIndex+0.5)*((width-2*margin)/cellsVertical)+margin,
                 1,
-                width/cellsVertical,
+                (width-2*margin)/cellsVertical,
                 {isStatic: true}
             );
             World.add(world, wall);
