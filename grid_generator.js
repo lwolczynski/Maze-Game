@@ -1,4 +1,6 @@
-const gridGen = (rows, columns) => {
+import { shuffle } from './utils.js';
+
+export const gridGen = (rows, columns) => {
     return {
         grid: Array(rows).fill(false).map(() => Array(columns).fill(false)),
         verticals: Array(rows).fill(false).map(() => Array(columns-1).fill(false)),   
@@ -8,9 +10,8 @@ const gridGen = (rows, columns) => {
                 return;
             }
             this.grid[row][column] = true;
-            console.log(row, column)
             const neighbors = [];
-            for (cell of [[row-1, column, 'up'], [row+1, column, 'down'], [row, column-1, 'left'], [row, column+1, 'right']]) {
+            for (let cell of [[row-1, column, 'up'], [row+1, column, 'down'], [row, column-1, 'left'], [row, column+1, 'right']]) {
                 if (cell[0]>=0 && cell[0]<rows) {
                     if (cell[1]>=0 && cell[1]<columns) {
                         if (this.grid[cell[0]][cell[1]] === false) {
@@ -20,7 +21,7 @@ const gridGen = (rows, columns) => {
                 }
             }
             const shuffledNeighbors = shuffle(neighbors);
-            for (neighbor of shuffledNeighbors) {
+            for (let neighbor of shuffledNeighbors) {
                 if (!this.grid[neighbor[0]][neighbor[1]]) {
                        switch(neighbor[2]) {
                         case 'up':

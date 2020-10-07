@@ -1,3 +1,5 @@
+import { gridGen } from './grid_generator.js';
+
 const { Engine, Render, Runner, World, Bodies } = Matter;
 
 const margin = 10;
@@ -31,8 +33,8 @@ const walls = [
 
 World.add(world, walls);
 
-cellsHorizontal = 30;
-cellsVertical = 30;
+const cellsHorizontal = 30;
+const cellsVertical = 30;
 
 const grid = gridGen(cellsHorizontal, cellsVertical);
 grid.createPath();
