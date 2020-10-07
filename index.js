@@ -34,7 +34,7 @@ const walls = [
 World.add(world, walls);
 
 const cellsHorizontal = 30;
-const cellsVertical = 30;
+const cellsVertical = 15;
 
 const grid = gridGen(cellsHorizontal, cellsVertical);
 grid.createPath();
@@ -43,9 +43,9 @@ grid.horizontals.forEach((row, rowIndex) => {
     row.forEach((pass, columnIndex) => {
         if (!pass) {
             const wall = Bodies.rectangle(
-                (columnIndex+0.5)*((height-2*margin)/cellsHorizontal)+margin,
+                (columnIndex+0.5)*((height-2*margin)/cellsVertical)+margin,
                 (rowIndex+1)*((height-2*margin)/cellsHorizontal)+margin,
-                (height-2*margin)/cellsHorizontal,
+                (height-2*margin)/cellsVertical,
                 1,
                 {isStatic: true}
             );
@@ -59,9 +59,9 @@ grid.verticals.forEach((row, rowIndex) => {
         if (!pass) {
             const wall = Bodies.rectangle(
                 (columnIndex+1)*((width-2*margin)/cellsVertical)+margin,
-                (rowIndex+0.5)*((width-2*margin)/cellsVertical)+margin,
+                (rowIndex+0.5)*((width-2*margin)/cellsHorizontal)+margin,
                 1,
-                (width-2*margin)/cellsVertical,
+                (width-2*margin)/cellsHorizontal,
                 {isStatic: true}
             );
             World.add(world, wall);
