@@ -10,6 +10,7 @@ export const gridGen = (rows, columns) => {
                 return;
             }
             this.grid[row][column] = true;
+            this.goal = [row, column];
             const neighbors = [];
             for (let cell of [[row-1, column, 'up'], [row+1, column, 'down'], [row, column-1, 'left'], [row, column+1, 'right']]) {
                 if (cell[0]>=0 && cell[0]<rows) {
